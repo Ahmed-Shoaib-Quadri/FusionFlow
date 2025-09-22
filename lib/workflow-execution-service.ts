@@ -1,5 +1,11 @@
 import { db } from '@/lib/db'
 
+type WhereClause = {
+  userId: string;
+  status?: string;
+  workflowId?: string;
+};
+
 export type ExecutionResult = {
   node: string
   status: 'success' | 'failed'
@@ -79,7 +85,7 @@ export class WorkflowExecutionService {
     workflowId?: string
   ) {
     try {
-      const whereClause: any = { userId }
+      const whereClause: WhereClause = { userId }
       
       if (status) {
         whereClause.status = status
@@ -116,7 +122,7 @@ export class WorkflowExecutionService {
 
   static async getExecutionCount(userId: string, status?: string, workflowId?: string) {
     try {
-      const whereClause: any = { userId }
+      const whereClause: WhereClause = { userId }
       
       if (status) {
         whereClause.status = status

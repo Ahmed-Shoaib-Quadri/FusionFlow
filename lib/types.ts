@@ -36,12 +36,55 @@ export type EditorCanvasTypes =
  | 'Action'
  | 'Wait';
 
+export type EditorCanvasMetadata = {
+    Email?: {
+        to: string;
+        subject: string;
+        body: string;
+    };
+    Condition?: {
+        condition: string;
+    };
+    AI?: {
+        prompt: string;
+    };
+    Slack?: {
+        channel: string;
+        message: string;
+    };
+    'Google Drive'?: {
+        fileId: string;
+        action: 'upload' | 'download' | 'share';
+    };
+    Notion?: {
+        pageId: string;
+        content: string;
+    };
+    'Custom Webhook'?: {
+        url: string;
+        method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+        body?: Record<string, unknown>;
+    };
+    'Google Calender'?: {
+        event: {
+            title: string;
+            start: string;
+            end: string;
+        };
+    };
+    Wait?: {
+        duration: number;
+    };
+    Trigger?: Record<string, unknown>;
+    Action?: Record<string, unknown>;
+};
+
 export type EditorCanvasCardType = {
     title: string
     description: string
     completed: boolean
     current: boolean
-    metadata: any
+    metadata: EditorCanvasMetadata[EditorCanvasTypes]
     type: EditorCanvasTypes
 }
 
